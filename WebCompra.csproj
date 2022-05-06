@@ -136,7 +136,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="WebCompra.aspx" />
+    <Content Include="WebCompraCarrinho.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="ListaProduto.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -249,12 +249,12 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="WebCompra.aspx.cs">
-      <DependentUpon>WebCompra.aspx</DependentUpon>
+    <Compile Include="WebCompraCarrinho.aspx.cs">
+      <DependentUpon>WebCompraCarrinho.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebCompra.aspx.designer.cs">
-      <DependentUpon>WebCompra.aspx</DependentUpon>
+    <Compile Include="WebCompraCarrinho.aspx.designer.cs">
+      <DependentUpon>WebCompraCarrinho.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

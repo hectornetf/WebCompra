@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="DetalheProduto.aspx?productID=<%#:Item.ProdutoID%>">
+                                    <a href="DetalheProduto.aspx?produtoID=<%#:Item.ProdutoID%>">
                                         <span>
                                             <%#:Item.ProdutoNome%>
                                         </span>
@@ -48,6 +48,11 @@
                                         <b>Preço: </b><%#:String.Format("{0:c}", Item.PrecoUnidade)%>
                                     </span>
                                     <br />
+                                    <a href="AddToCompra.aspx?produtoID=<%#:Item.ProdutoID %>">
+                                        <span class="listaProdutoItem">
+                                            <b>Adicionar Compra<b>
+                                        </span>
+                                    </a>
                                 </td>
                             </tr>
                             <tr>

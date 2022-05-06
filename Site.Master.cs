@@ -17,7 +17,7 @@ namespace WebCompra
         
         public IQueryable<Categoria> GetCategorias()
         {
-            var _db = new WebCompra.Models.ProdutoContext();
+            var _db = new Models.ProdutoContext();
             IQueryable<Categoria> query = _db.Categorias;
             return query;
         }

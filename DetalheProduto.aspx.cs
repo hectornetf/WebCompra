@@ -17,7 +17,7 @@ namespace WebCompra
         }
         public IQueryable<Produto> GetProdutos([QueryString("produtoID")] int? produtoID)
         {
-            var _db = new WebCompra.Models.ProdutoContext();
+            var _db = new Models.ProdutoContext();
             IQueryable<Produto> query = _db.Produtos;
             if (produtoID.HasValue && produtoID > 0)
             {

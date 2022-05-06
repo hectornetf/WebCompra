@@ -27,7 +27,7 @@ namespace WebCompra
                 Debug.Fail("Erro : Nunca devemos acessar AddToCompra.aspx sem um ProdutoId.");
                 throw new Exception("Erro : Carregamento so pode ser feito apos definir um ProdutoId.");
             }
-            Response.Redirect("WebCompra.aspx");
+            Response.Redirect("WebCompraCarrinho.aspx");
         }
 
     }

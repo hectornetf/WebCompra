@@ -1,12 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebCompra.aspx.cs" Inherits="WebCompra.WebCompra" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebCompraCarrinho.aspx.cs" Inherits="WebCompra.WebCompra" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div id="WebCompraTitulo" runat="server" class="ContentHead">
-        <h1>Web Compra</h1>
+        <h1>Web Compra Carrinho</h1>
     </div>
     <asp:GridView ID="CompraLista"
         runat="server" AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4"
-        ItemType="WebCompra.Models.CompraItem" SelectMethod="GetShoppingCartItems"
+        ItemType="WebCompra.Models.CompraItem" SelectMethod="GetCompraItems"
         CssClass="table table-striped table-bordered">
         <Columns>
             <asp:BoundField DataField="ProdutoID" HeaderText="ID" SortExpression="ProdutoID" />
@@ -37,4 +37,14 @@
         </strong>
     </div>
     <br />
+        <table> 
+    <tr>
+      <td>
+        <asp:Button ID="AtualizarBtn" runat="server" Text="Atualizar" OnClick="AtualizarBtn_Click" />
+      </td>
+      <td>
+        <!--Checkout Carrinho -->
+      </td>
+    </tr>
+    </table>
 </asp:Content>

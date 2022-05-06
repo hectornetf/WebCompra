@@ -77,5 +77,88 @@ namespace WebCompra.Logic
             return _db.CompraItems.Where(
                 c => c.CompraId == WebCompraId).ToList();
         }
+
+        public decimal GetTotal()
+        {
+            WebCompraId = GetCompraId();
+
+            // Multiplique o preço do produto pela quantidade desse produto para obter
+            // o preço atual de cada um desses produtos no carrinho.
+            // Soma todos os totais de preços do produto para obter o total do carrinho.
+
+            decimal? total = decimal.Zero;
+            total = (decimal?)(from compraItems in _db.CompraItems
+                               where compraItems.CompraId == WebCompraId
+                               select (int?)compraItems.Quantidade *
+                               compraItems.Produto.PrecoUnidade).Sum();
+            return total ?? decimal.Zero;
+        }
+
+        public WebCompraAct GetCompra(HttpContext context)
+        {
+            using (var compra = new WebCompraAct())
+            {
+                compra.WebCompraId = compra.GetCompraId();
+                return compra;
+            }
+        }
+
+        public void AtualizarAtualizarWebCompraDatabase (String compraId, AtualizarWebCompra[] CompraItemUpdates)
+        {
+            using (var db = new Models.ProdutoContext())
+            {
+                try
+                {
+                    int CompraItemCount = CompraItemUpdates.Count();
+                    List<CompraItem>  myCompra = GetCompraItems();
+                    foreach ( var compraItem in myCompra)
+                    {
+                        // Iterar por todas as linhas na lista do carrinho de compras
+                        for (int i = 0; i < CompraItemCount; i++)
+                        {
+                            if (compraItem.Produto.ProdutoID == CompraItemUpdates[i].ProdutoId)
+                            {
+                                if (CompraItemUpdates[i].PuxarQuantidade < 1 ||  CompraItemUpdates[i].RemoveItem == true)
+                                {
+                                    RemoveItem(compraId, compraItem.Produto);
+                                }
+                                else
+                                {
+                                    AtualizarItem(compraId, compraItem.ProdutoId, CompraItemUpdates[i].PuxarQuantidade);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception exp)
+                {
+                    throw new Exception ("Erro: Não foi possível atualizar o banco de dados do carrinho -" + exp.Message.ToString(), exp);
+                }
+            }
+        }
+        public void AtualizarItem( string atualizarCompraID, int atualizarProdutoId, int quantidade)
+        {
+            using (var _db = new Models.ProdutoContext())
+            {
+                try
+                {
+                    var myItem = (from c in _db.CompraItems where c.CompraId == atualizarCompraID && c.Produto.ProdutoID == atualizarProdutoId select c).FirstOrDefault();
+                    if (myItem != null)
+                    {
+                        myItem.Quantidade = quantidade;
+                        _db.SaveChanges();
+                    }
+                }
+                catch (Exception exp)
+                {
+                    throw new Exception("Erro: Não foi possível atualizar o item do carrinho -" + exp.Message.ToString(), exp);
+                }
+            }
+        }
+        public void CarrinhoVazio()
+        {
+            WebCompraId = GetCompraId();
+            var
+        }
     }
 }
