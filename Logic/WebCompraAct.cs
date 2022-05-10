@@ -19,7 +19,7 @@ namespace WebCompra.Logic
             var compraItem = _db.CompraItems.SingleOrDefault(
                 c => c.CompraId == WebCompraId
                 && c.ProdutoId == id);
-                if (compraItem == null)
+            if (compraItem == null)
             {
                 //Criar novo item se não houver nenhum
                 compraItem = new CompraItem
@@ -32,16 +32,16 @@ namespace WebCompra.Logic
                     Quantidade = 1,
                     DataCriada = DateTime.Now
                 };
-                
+
                 _db.CompraItems.Add(compraItem);
 
             }
-                else
+            else
             {
                 //Se houver item no carrinho adicionar quantidade
                 compraItem.Quantidade++;
             }
-                _db.SaveChanges();
+            _db.SaveChanges();
         }
 
         public void Dispose()
@@ -103,24 +103,24 @@ namespace WebCompra.Logic
             }
         }
 
-        public void AtualizarAtualizarWebCompraDatabase (String compraId, AtualizarWebCompra[] CompraItemUpdates)
+        public void AtualizarAtualizarWebCompraDatabase(String compraId, AtualizarWebCompra[] CompraItemUpdates)
         {
             using (var db = new Models.ProdutoContext())
             {
                 try
                 {
                     int CompraItemCount = CompraItemUpdates.Count();
-                    List<CompraItem>  myCompra = GetCompraItems();
-                    foreach ( var compraItem in myCompra)
+                    List<CompraItem> myCompra = GetCompraItems();
+                    foreach (var compraItem in myCompra)
                     {
                         // Iterar por todas as linhas na lista do carrinho de compras
                         for (int i = 0; i < CompraItemCount; i++)
                         {
                             if (compraItem.Produto.ProdutoID == CompraItemUpdates[i].ProdutoId)
                             {
-                                if (CompraItemUpdates[i].PuxarQuantidade < 1 ||  CompraItemUpdates[i].RemoveItem == true)
+                                if (CompraItemUpdates[i].PuxarQuantidade < 1 || CompraItemUpdates[i].RemoveItem == true)
                                 {
-                                    RemoveItem(compraId, compraItem.Produto);
+                                    RemoveItem(compraId, compraItem.ProdutoId);
                                 }
                                 else
                                 {
@@ -132,11 +132,34 @@ namespace WebCompra.Logic
                 }
                 catch (Exception exp)
                 {
-                    throw new Exception ("Erro: Não foi possível atualizar o banco de dados do carrinho -" + exp.Message.ToString(), exp);
+                    throw new Exception("Erro: Não foi possível atualizar o banco de dados do carrinho -" + exp.Message.ToString(), exp);
                 }
             }
         }
-        public void AtualizarItem( string atualizarCompraID, int atualizarProdutoId, int quantidade)
+
+        public void RemoveItem(string removeCompraID, int removeProdutoID)
+        {
+            using (var _db = new Models.ProdutoContext())
+            {
+                try
+                {
+                    var myItem = (from c in _db.CompraItems where c.CompraId == removeCompraID && c.Produto.ProdutoID == removeProdutoID select c).FirstOrDefault();
+                    if (myItem != null)
+                    {
+                        //Remove item.
+                        _db.CompraItems.Remove(myItem);
+                        _db.SaveChanges();
+                    }
+                }
+                catch (Exception exp)
+                {
+                    throw new Exception("ERRO: Não foi possível remover o item do carrinho - " + exp.Message.ToString(), exp);
+                }
+
+            }
+        }
+
+        public void AtualizarItem(string atualizarCompraID, int atualizarProdutoId, int quantidade)
         {
             using (var _db = new Models.ProdutoContext())
             {
@@ -158,7 +181,31 @@ namespace WebCompra.Logic
         public void CarrinhoVazio()
         {
             WebCompraId = GetCompraId();
-            var
+            var compraItems = _db.CompraItems.Where(c => c.CompraId == WebCompraId);
+            foreach (var compraItem in compraItems)
+            {
+                _db.CompraItems.Remove(compraItem);
+            }
+            //Salva alterações.
+            _db.SaveChanges();
+        }
+
+        public int GetCount()
+        {
+            WebCompraId = GetCompraId();
+            // Obtém a contagem de cada item no carrinho e soma-os
+            int? count = (from compraItem in _db.CompraItems
+                          where compraItem.CompraId == WebCompraId
+                          select (int?)compraItem.Quantidade).Sum();
+            //Retorna 0 se todas as entradas forem nulas
+            return count ?? 0;
+        }
+
+        public struct AtualizarWebCompra
+        {
+            public int ProdutoId;
+            public int PuxarQuantidade;
+            public bool RemoveItem;
         }
     }
 }

@@ -59,10 +59,10 @@ namespace WebCompra
                     atualizarWebCompras[i].RemoveItem = cbRemove.Checked;
 
                     TextBox quantidadeTextBox = new TextBox();
-                    quantidadeTextBox = (TextBox)CompraLista[i].FindControl("PuxarQuantidade");
-                    atualizarWebCompras[i].PuxarQuantidade = Convert.ToInt16(quantidadeTextBox.Text.ToString);
+                    quantidadeTextBox = (TextBox)CompraLista.Rows[i].FindControl("PuxarQuantidade");
+                    atualizarWebCompras[i].PuxarQuantidade = Convert.ToInt16(quantidadeTextBox.Text.ToString());
                 }
-                usersWebCompra.AtualizarWebCompraDatabase(compraId, atualizarWebCompras);
+                usersWebCompra.AtualizarAtualizarWebCompraDatabase(compraId, atualizarWebCompras);
                 CompraLista.DataBind();
                 lblTotal.Text = String.Format("{0:c}", usersWebCompra.GetTotal());
                 return usersWebCompra.GetCompraItems();
