@@ -31,6 +31,7 @@ namespace WebCompra
                     lblTotal.Text = "";
                     WebCompraTitulo.InnerText = "Carrinho Compra Esta Vazio";
                     AtualizarBtn.Visible = false;
+                    CheckoutImageBtn.Visible = false;
                 }
             }
 
@@ -86,6 +87,15 @@ namespace WebCompra
         protected void AtualizarBtn_Click(object sender, EventArgs e)
         {
             AtualizarCompraItems();
+        }
+
+        protected void CheckoutBtn_Click(object sender, ImageClickEventArgs e)
+        {
+            using (WebCompraAct usersCheckCarrinho = new WebCompraAct())
+            {
+                Session[""] = usersCheckCarrinho.GetTotal();
+            }
+            Response.Redirect("Checkout/CheckoutStart.aspx");
         }
     }
 }

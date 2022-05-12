@@ -44,6 +44,11 @@
       </td>
       <td>
         <!--Checkout Carrinho -->
+          <asp:ImageButton ID="CheckoutImageBtn" runat="server" 
+                      ImageUrl="https://www.flaticon.com/free-icon/checkout_102655" 
+                      Width="145" AlternateText="Check out" 
+                      OnClick="CheckoutBtn_Click" 
+                      BackColor="Transparent" BorderWidth="0" />
       </td>
     </tr>
     </table>

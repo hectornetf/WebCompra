@@ -7,47 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebCompra
+namespace WebCompra.Checkout
 {
 
 
-    public partial class SiteMaster
+    public partial class CheckoutReview
     {
 
         /// <summary>
-        /// AddProduto control.
+        /// OrderItemList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor AddProduto;
+        protected global::System.Web.UI.WebControls.GridView OrderItemList;
 
         /// <summary>
-        /// carrinhoContador control.
+        /// InfoEnvio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor carrinhoContador;
+        protected global::System.Web.UI.WebControls.DetailsView InfoEnvio;
 
         /// <summary>
-        /// categoriaLista control.
+        /// CheckoutConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView categoriaLista;
-
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button CheckoutConfirm;
     }
 }
