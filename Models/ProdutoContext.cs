@@ -13,7 +13,6 @@ namespace WebCompra.Models
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<CompraItem> CompraItems { get; set; }
-        public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<DetalhePedido> DetalhePedidos { get; set; }
+
     }
 }

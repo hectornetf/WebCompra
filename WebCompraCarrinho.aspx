@@ -4,14 +4,16 @@
     <div id="WebCompraTitulo" runat="server" class="ContentHead">
         <h1>Web Compra Carrinho</h1>
     </div>
+
     <asp:GridView ID="CompraLista"
         runat="server" AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4"
         ItemType="WebCompra.Models.CompraItem" SelectMethod="GetCompraItems"
         CssClass="table table-striped table-bordered">
         <Columns>
+            <asp:BoundField DataField="CompraId" HeaderText="Numero do Pedido" SortExpression="CompraId" />
             <asp:BoundField DataField="ProdutoID" HeaderText="ID" SortExpression="ProdutoID" />
             <asp:BoundField DataField="Produto.ProdutoNome" HeaderText="Nome" />
-            <asp:BoundField DataField="Produto.PrecoUnidade" HeaderText="Preco (each)" DataFormatString="{0:c}" />
+            <asp:BoundField DataField="Produto.PrecoUnidade" HeaderText="Preço" DataFormatString="{0:c}" />
             <asp:TemplateField HeaderText="Quantidade">
                 <ItemTemplate>
                     <asp:TextBox ID="PuxarQuantidade" Width="40" runat="server" Text="<%#: Item.Quantidade %>"></asp:TextBox>
@@ -28,12 +30,14 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+        <Columns></Columns>
     </asp:GridView>
     <div>
         <p></p>
         <strong>
             <asp:Label ID="LabelTotalText" runat="server" Text="Total: "></asp:Label>
             <asp:Label ID="lblTotal" runat="server" EnableViewState="false"></asp:Label>
+            <p></p>
         </strong>
     </div>
     <br />
@@ -44,11 +48,7 @@
       </td>
       <td>
         <!--Checkout Carrinho -->
-          <asp:ImageButton ID="CheckoutImageBtn" runat="server" 
-                      ImageUrl="https://www.flaticon.com/free-icon/checkout_102655" 
-                      Width="145" AlternateText="Check out" 
-                      OnClick="CheckoutBtn_Click" 
-                      BackColor="Transparent" BorderWidth="0" />
+          <asp:Button ID="CheckoutBtn" runat="server" Text="Gerar Pedido" OnClick="Enviar_Click" />
       </td>
     </tr>
     </table>

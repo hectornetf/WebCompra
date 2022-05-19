@@ -208,16 +208,16 @@ namespace WebCompra.Logic
             public bool RemoveItem;
         }
 
-        public void MigrarCarrrinho(string CompraId, string userName )
-        {
-            //Gera looping por não ter criado a tela de registro de usuario
-            var compraCarrinho = _db.CompraItems.Where(c => c.CompraId == CompraId);
-            foreach ( CompraItem item in compraCarrinho)
-            {
-                item.CompraId = userName;
-            }
-            HttpContext.Current.Session[WebCompraSessionKey] = userName;
-            _db.SaveChanges();
-        }
+        //public void MigrarCarrrinho(string CompraId, string userName )
+        //{
+        //    //Gera looping por não ter criado a tela de registro de usuario
+        //    var compraCarrinho = _db.CompraItems.Where(c => c.CompraId == CompraId);
+        //    foreach ( CompraItem item in compraCarrinho)
+        //    {
+        //        item.CompraId = userName;
+        //    }
+        //    HttpContext.Current.Session[WebCompraSessionKey] = userName;
+        //    _db.SaveChanges();
+        //}
     }
 }

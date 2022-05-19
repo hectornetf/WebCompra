@@ -45,11 +45,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -118,11 +124,6 @@
     <Content Include="Catalog\Images\Thumbs\mouse.png" />
     <Content Include="Catalog\Images\Thumbs\notebook.png" />
     <Content Include="Catalog\Images\Thumbs\teclado.png" />
-    <Content Include="Checkout\CheckoutCancel.aspx" />
-    <Content Include="Checkout\CheckoutComplete.aspx" />
-    <Content Include="Checkout\CheckoutError.aspx" />
-    <Content Include="Checkout\CheckoutReview.aspx" />
-    <Content Include="Checkout\CheckoutStart.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -203,41 +204,6 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Checkout\CheckoutCancel.aspx.cs">
-      <DependentUpon>CheckoutCancel.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Checkout\CheckoutCancel.aspx.designer.cs">
-      <DependentUpon>CheckoutCancel.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Checkout\CheckoutComplete.aspx.cs">
-      <DependentUpon>CheckoutComplete.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Checkout\CheckoutComplete.aspx.designer.cs">
-      <DependentUpon>CheckoutComplete.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Checkout\CheckoutError.aspx.cs">
-      <DependentUpon>CheckoutError.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Checkout\CheckoutError.aspx.designer.cs">
-      <DependentUpon>CheckoutError.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Checkout\CheckoutReview.aspx.cs">
-      <DependentUpon>CheckoutReview.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Checkout\CheckoutReview.aspx.designer.cs">
-      <DependentUpon>CheckoutReview.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Checkout\CheckoutStart.aspx.cs">
-      <DependentUpon>CheckoutStart.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Checkout\CheckoutStart.aspx.designer.cs">
-      <DependentUpon>CheckoutStart.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -273,8 +239,6 @@
     <Compile Include="Logic\WebCompraAct.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\CompraItem.cs" />
-    <Compile Include="Models\DetalhePedido.cs" />
-    <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\ProdutoContext.cs" />
     <Compile Include="Models\ProdutoDatabaseInitializer.cs" />
