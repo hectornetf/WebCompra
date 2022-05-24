@@ -273,6 +273,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="application\pdf\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

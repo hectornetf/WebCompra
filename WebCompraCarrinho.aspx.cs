@@ -12,6 +12,7 @@ using System.Web.ModelBinding;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using iTextSharp.text.html;
 using iTextSharp.text.html.simpleparser;
 
 namespace WebCompra
@@ -96,107 +97,48 @@ namespace WebCompra
 
         protected void Enviar_Click(object sender, EventArgs e)
         {
-            //Document doc = new Document(PageSize.A4);
-            //doc.SetMargins(40, 40, 40, 80);
-            //doc.AddCreationDate();
-            //string caminho = @"C:\Compras\" + "PedidoCompra.pdf";
-
-            //PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminho, FileMode.Create));
-
-            //doc.Open();
-
-            //Paragraph titulo = new Paragraph();
-            //titulo.Font = new Font(Font.FontFamily.COURIER, 40);
-            //titulo.Alignment = Element.ALIGN_CENTER;
-            //titulo.Add("Pedido de Compra");
-            //doc.Add(titulo);
-
-            //Paragraph paragrafo = new Paragraph("", new Font(Font.NORMAL, 12));
-            //string conteudo = "Solicitação de compra dos seguintes items";
-            //paragrafo.Add(conteudo);
-            //doc.Add(paragrafo);
-
-            ////Teste
-
-            //PdfPTable tabela = new PdfPTable(6);
-
-            //PdfPCell celula = new PdfPCell();
-
-            //celula.Phrase = new Phrase("Numero do Pedido");
-            //tabela.AddCell(celula);
-
-            //celula.Phrase = new Phrase("Id");
-            //tabela.AddCell(celula);
-
-            //celula.Phrase = new Phrase("Nome");
-            //tabela.AddCell(celula);
-
-            //celula.Phrase = new Phrase("Preço");
-            //tabela.AddCell(celula);
-
-            //celula.Phrase = new Phrase("Quantidade");
-            //tabela.AddCell(celula);
-
-            //celula.Phrase = new Phrase("Item Total");
-            //tabela.AddCell(celula);
-
-            //CompraItem compra = new CompraItem();
-
-            //foreach (GridViewRow row in CompraLista.Rows)
-            //{
-            //    compra.CompraId = row.Cells[0].Text;
-            //    compra.ProdutoId = int.Parse(row.Cells[1].Text);
-            //    compra.Quantidade = int.Parse(row.Cells[2].Text);
-            //    compra.Produto.ProdutoNome = row.Cells[3].Text;
-            //    compra.Produto.PrecoUnidade = int.Parse(Cells[4].Text);
-
-
-            //}
-
-
-
-
-            //StringWriter stringWriter = new StringWriter();
-            //HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
-            //CompraLista.DataBind();
-            //CompraLista.RenderControl(htmlTextWriter);
-            //CompraLista.HeaderRow.Style.Add("width", "10%");
-            //CompraLista.HeaderRow.Style.Add("font-size", "15px");
-            //CompraLista.Style.Add("text-decoration", "none");
-            //CompraLista.Style.Add("font-family", "Arial, Helvetica, sans-serif;");
-            //CompraLista.Style.Add("font-size", "8px");
-            //StringReader sr = new StringReader(stringWriter.ToString());
-
-
-            //doc.Close();
-            //System.Diagnostics.Process.Start(caminho);
-
-
-            Document doc = new Document(PageSize.A4);
-            doc.SetMargins(40, 40, 40, 80);
-            doc.AddCreationDate();
-            string caminho = @"C:\Compras\" + "PedidoCompra.pdf";
-            Response.AddHeader("content-disposition", "attachment;filename=EmployeeList.pdf");
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=PedidoCompra.pdf");
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             StringWriter stringWriter = new StringWriter();
             HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
-            GridView compraLista = CompraLista;
-            compraLista.DataBind();
-            compraLista.RenderControl(htmlTextWriter);
-            compraLista.HeaderRow.Style.Add("width", "10%");
-            compraLista.HeaderRow.Style.Add("font-size", "15px");
-            compraLista.Style.Add("text-decoration", "none");
-            compraLista.Style.Add("font-family", "Arial, Helvetica, sans-serif;");
-            compraLista.Style.Add("font-size", "8px");
+            CompraLista.DataBind();
+            CompraLista.RenderControl(htmlTextWriter);
+            CompraLista.HeaderRow.Style.Add("width", "10%");
+            CompraLista.HeaderRow.Style.Add("font-size", "15px");
+            CompraLista.Style.Add("text-decoration", "none");
+            CompraLista.Style.Add("font-family", "Arial, Helvetica, sans-serif;");
+            CompraLista.Style.Add("font-size", "8px");
             StringReader sr = new StringReader(stringWriter.ToString());
+            Document doc = new Document(PageSize.A2, 7f, 7f, 7f, 0f);
             HTMLWorker htmlparser = new HTMLWorker(doc);
             PdfWriter.GetInstance(doc, Response.OutputStream);
             doc.Open();
+
+            Paragraph titulo = new Paragraph("\n");
+            titulo.Font = new Font(Font.FontFamily.COURIER, 40);
+            titulo.Alignment = Element.ALIGN_CENTER;
+            titulo.Add("Pedido de Compra \n");
+            doc.Add(titulo);
+
+            Paragraph paragrafo = new Paragraph(" ", new Font(Font.NORMAL, 20));
+            string conteudo = "Solicitação de compra dos seguintes items \n \n ";
+            paragrafo.Alignment = Element.ALIGN_LEFT;
+            paragrafo.Add(conteudo);
+            doc.Add(paragrafo);
+
+
+
+
             htmlparser.Parse(sr);
             doc.Close();
             Response.Write(doc);
             Response.End();
 
+        }
+
+        public override void VerifyRenderingInServerForm(Control control)
+        {
         }
 
     }

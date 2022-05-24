@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebCompraCarrinho.aspx.cs" Inherits="WebCompra.WebCompra" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebCompraCarrinho.aspx.cs" Inherits="WebCompra.WebCompra" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div id="WebCompraTitulo" runat="server" class="ContentHead">
