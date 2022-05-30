@@ -10,7 +10,7 @@
         ItemType="WebCompra.Models.CompraItem" SelectMethod="GetCompraItems"
         CssClass="table table-striped table-bordered">
         <Columns>
-            <asp:BoundField DataField="CompraId" HeaderText="Numero do Pedido" SortExpression="CompraId" />
+            <asp:BoundField DataField="CompraId" HeaderText="Codigo do Pedido" SortExpression="CompraId" />
             <asp:BoundField DataField="ProdutoID" HeaderText="ID" SortExpression="ProdutoID" />
             <asp:BoundField DataField="Produto.ProdutoNome" HeaderText="Nome" />
             <asp:BoundField DataField="Produto.PrecoUnidade" HeaderText="Preço" DataFormatString="{0:c}" />
