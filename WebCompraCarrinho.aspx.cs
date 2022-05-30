@@ -177,14 +177,14 @@ namespace WebCompra
                 //Envio de email
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient();
-                mail.From = new MailAddress("hector.troncoso@antlia.com.br");
-                mail.To.Add("hector.troncoso@antlia.com.br");
+                mail.From = new MailAddress("email@a.com.br");
+                mail.To.Add("email2@a.com.br");
                 mail.Subject = "Pedido Compra";
                 mail.Body = "Segue solicitação compra";
                 mail.Attachments.Add(new Attachment(new MemoryStream(bytes), "PedidoCompra.pdf"));
                 mail.IsBodyHtml = true;
                 SmtpServer.UseDefaultCredentials = false;
-                NetworkCredential NetworkCred = new NetworkCredential("hector.troncoso@antlia.com.br", "H18ne20#21");
+                NetworkCredential NetworkCred = new NetworkCredential("email@a.com.br", "senha");
                 SmtpServer.Credentials = NetworkCred;
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Port = 587;
